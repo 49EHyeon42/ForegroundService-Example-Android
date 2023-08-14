@@ -1,6 +1,7 @@
 package dev.ehyeon.foregroundserviceexampleapplication;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -31,6 +32,15 @@ public class ForegroundService extends Service {
         timerTask = new TimerTask() {
             @Override
             public void run() {
+                Notification notification =
+                        new Notification.Builder(getBaseContext(), ((EHyeonApplication) getApplication()).getChannelId())
+                                .setContentTitle("Title")
+                                .setContentText("count = " + count)
+                                .setSmallIcon(R.drawable.ic_launcher_background)
+                                .build();
+
+                getSystemService(NotificationManager.class).notify(SERVICE_ID, notification);
+
                 Log.i(TAG, "count = " + count++);
             }
         };
@@ -41,7 +51,7 @@ public class ForegroundService extends Service {
         Notification notification =
                 new Notification.Builder(this, ((EHyeonApplication) getApplication()).getChannelId())
                         .setContentTitle("Title")
-                        .setContentText("Text")
+                        .setContentText("count = 0")
                         .setSmallIcon(R.drawable.ic_launcher_background)
                         .build();
 

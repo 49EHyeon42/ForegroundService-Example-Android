@@ -6,6 +6,8 @@
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".EHyeonApplication"
         android:allowBackup="true"

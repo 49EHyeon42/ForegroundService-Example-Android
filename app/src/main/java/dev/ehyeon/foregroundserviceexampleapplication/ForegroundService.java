@@ -5,6 +5,8 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -40,6 +42,10 @@ public class ForegroundService extends Service {
                                 .build();
 
                 getSystemService(NotificationManager.class).notify(SERVICE_ID, notification);
+
+                if (count != 0 && count % 10 == 0) {
+                    ((Vibrator) getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+                }
 
                 Log.i(TAG, "count = " + count++);
             }
